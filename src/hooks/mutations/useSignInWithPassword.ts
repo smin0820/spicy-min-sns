@@ -1,14 +1,14 @@
 import { signInWithPassword } from "@/api/auth";
+import type { UseMuTationCallback } from "@/types";
 import { useMutation } from "@tanstack/react-query";
-import { toast } from "sonner";
 
-export function useSignInWithPassword() {
+export function useSignInWithPassword(callbacks?: UseMuTationCallback) {
   return useMutation({
     mutationFn: signInWithPassword,
     onError: (error) => {
-      toast.error(error.message, {
-        position: "top-center",
-      });
+      console.log(error);
+
+      if (callbacks?.onError) callbacks.onError(error);
     },
   });
 }
