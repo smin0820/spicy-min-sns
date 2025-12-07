@@ -8,6 +8,7 @@ import { Link } from "react-router";
 import gitHubLogo from "@/assets/github-mark.svg";
 import { useSignInWithOAuth } from "@/hooks/mutations/useSignInWithOAuth";
 import { toast } from "sonner";
+import { generateErrorMessage } from "@/lib/error";
 
 export default function SignInPage() {
   const [email, setEmail] = useState("");
@@ -15,14 +16,22 @@ export default function SignInPage() {
 
   const { mutate: signInWithPassword } = useSignInWithPassword({
     onError: (error) => {
-      toast.error(error.message, {
+      const message = generateErrorMessage(error);
+      toast.error(message, {
         position: "top-center",
       });
 
       setPassword("");
     },
   });
-  const { mutate: signInWithOAuth } = useSignInWithOAuth();
+  const { mutate: signInWithOAuth } = useSignInWithOAuth({
+    onError: (error) => {
+      const message = generateErrorMessage(error);
+      toast.error(message, {
+        position: "top-center",
+      });
+    },
+  });
 
   const handleSignInWithPassword = () => {
     if (email.trim() === "") return;
