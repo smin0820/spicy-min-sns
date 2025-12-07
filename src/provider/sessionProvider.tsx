@@ -1,3 +1,4 @@
+import GlobalLoader from "@/components/GlobalLoader";
 import supabase from "@/lib/supabase";
 import { useIsSessionLoaded, useSetSession } from "@/store/session";
 import { useEffect, type ReactNode } from "react";
@@ -10,7 +11,8 @@ export default function SessionProvider({ children }: { children: ReactNode }) {
       setSession(session);
     });
   }, []);
-  if (!isSessionLoaded) return <div>로딩 중...</div>;
+
+  if (!isSessionLoaded) return <GlobalLoader />;
 
   return children;
 }
