@@ -50,3 +50,10 @@ export async function requestPasswordResetEmail(email: string) {
   if (error) throw error;
   return data;
 }
+
+export async function UpdatePassword(password: string) {
+  const { data, error } = await supabase.auth.updateUser({ password });
+
+  if (error) throw error;
+  return data;
+}
