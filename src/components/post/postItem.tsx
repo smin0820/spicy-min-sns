@@ -1,5 +1,4 @@
 import { HeartIcon, MessageCircle } from "lucide-react";
-import type { Post } from "@/types";
 import defaultAvatar from "@/assets/default-avatar.jpg";
 import {
   Carousel,
@@ -10,12 +9,23 @@ import { formatTimeAgo } from "@/lib/time";
 import EditPostButton from "./editPostButton";
 import DeletePostButton from "./deletePostButton";
 import { useSession } from "@/store/session";
+import { usePostByIdData } from "@/hooks/queries/usePostByIdData";
+import Loader from "../loader";
+import Fallback from "../fallback";
 
-export default function PostItem(post: Post) {
+export default function PostItem({ postId }: { postId: number }) {
   const session = useSession();
   const userId = session?.user.id;
 
-  const isMine = post.author_id === userId;
+  const {
+    data: post,
+    isPending,
+    error,
+  } = usePostByIdData({ postId, type: "FEED" });
+  const isMine = post?.author_id === userId;
+
+  if (isPending) return <Loader />;
+  if (error) return <Fallback />;
 
   return (
     <div className="flex flex-col gap-4 border-b pb-8">
