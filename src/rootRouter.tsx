@@ -2,7 +2,7 @@ import { Navigate, Route, Routes } from "react-router";
 import ForgetPasswordPage from "./pages/forgetPassword";
 import HomePage from "./pages/home";
 import PostDetailPage from "./pages/postDetail";
-import ProfilePage from "./pages/profile";
+import ProfilePage from "./pages/profileDetail";
 import ResetPasswordPage from "./pages/resetPassword";
 import SignInPage from "./pages/signIn";
 import SignUpPage from "./pages/signUp";
