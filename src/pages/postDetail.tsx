@@ -1,3 +1,5 @@
+import CommentEditor from "@/components/comment/commentEditor";
+import CommentList from "@/components/comment/commentList";
 import PostItem from "@/components/post/postItem";
 import { Navigate, useParams } from "react-router";
 
@@ -8,8 +10,11 @@ export default function PostDetailPage() {
   if (!postId) return <Navigate to={"/"} />;
 
   return (
-    <div>
+    <div className="flex flex-col gap-5">
       <PostItem postId={Number(postId)} type={"DETAIL"} />
+      <div className="text-xl font-bold">댓글</div>
+      <CommentEditor />
+      <CommentList />
     </div>
   );
 }
