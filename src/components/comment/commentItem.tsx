@@ -2,8 +2,12 @@ import { Link } from "react-router";
 import defaultAvatar from "@/assets/default-avatar.jpg";
 import type { Comment } from "@/types";
 import { formatTimeAgo } from "@/lib/time";
+import { useSession } from "@/store/session";
 
 export default function CommentItem(props: Comment) {
+  const session = useSession();
+
+  const isMine = session!.user.id === props.author_id;
   return (
     <div className={"flex flex-col gap-8 border-b pb-5"}>
       <div className="flex items-start gap-4">
@@ -25,9 +29,13 @@ export default function CommentItem(props: Comment) {
               <div>{formatTimeAgo(props.created_at)}</div>
             </div>
             <div className="flex items-center gap-2">
-              <div className="cursor-pointer hover:underline">수정</div>
-              <div className="bg-border h-[13px] w-0.5"></div>
-              <div className="cursor-pointer hover:underline">삭제</div>
+              {isMine && (
+                <>
+                  <div className="cursor-pointer hover:underline">수정</div>
+                  <div className="bg-border h-[13px] w-0.5"></div>
+                  <div className="cursor-pointer hover:underline">삭제</div>
+                </>
+              )}
             </div>
           </div>
         </div>
