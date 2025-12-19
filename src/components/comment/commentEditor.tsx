@@ -32,7 +32,9 @@ export default function CommentEditor({ postId }: { postId: number }) {
     <div className="flex flex-col gap-2">
       <Textarea value={content} onChange={(e) => setContent(e.target.value)} />
       <div className="flex justify-end">
-        <Button onClick={handleSubmitClick}>작성</Button>
+        <Button className="cursor-pointer" onClick={handleSubmitClick}>
+          작성
+        </Button>
       </div>
     </div>
   );
