@@ -2,6 +2,7 @@ import { Link, Outlet } from "react-router";
 import logo from "@/assets/logo.png";
 import { SunIcon } from "lucide-react";
 import ProfileButton from "./header/profileButton";
+import ThemeButton from "./header/themeButton";
 
 export default function GlobalLayout() {
   return (
@@ -12,9 +13,7 @@ export default function GlobalLayout() {
             <img className="h-5" src={logo} alt="로고" />
           </Link>
           <div className="flex items-center gap-5">
-            <div className="hover:bg-muted cursor-pointer rounded-full p-2">
-              <SunIcon />
-            </div>
+            <ThemeButton />
             <ProfileButton />
           </div>
         </div>
